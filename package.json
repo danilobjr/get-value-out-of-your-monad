@@ -1,0 +1,13 @@
+{
+  "name": "get-value-out-of-your-monad",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Danilo Barros <danilobjr@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.17.3"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.13"
+  }
+}
