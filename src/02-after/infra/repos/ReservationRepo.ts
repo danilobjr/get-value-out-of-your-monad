@@ -1,4 +1,4 @@
-import { Reservation } from '../models'
+import { Reservation } from '../../domain/models'
 
 // TODO should be in 'infra' layer
 export type IReservationRepo = {

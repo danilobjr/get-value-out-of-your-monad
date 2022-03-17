@@ -1,5 +1,5 @@
 import type { Reservation } from '../models'
-import { add } from '../utils/mathUtils'
+import { add } from '../../utils/mathUtils'
 import { Either, left, right } from 'fp-ts/Either'
 
 type Failure = 'Over capacity'
@@ -12,7 +12,6 @@ export interface ITryBookReservationUseCase {
   ) => Either<Failure, Sucess>
 }
 
-// TODO should be in 'core' layer
 export class TryBookReservationUseCase implements ITryBookReservationUseCase {
   constructor(private capacity: number) {}
 

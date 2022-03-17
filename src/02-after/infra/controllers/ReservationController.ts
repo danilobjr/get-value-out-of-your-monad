@@ -1,11 +1,10 @@
 import { Request, Response } from 'express'
-import { Reservation } from '../models'
+import { Reservation } from '../../domain/models'
 import { IReservationRepo } from '../repos'
-import { ITryBookReservationUseCase } from '../usecases/TryBookReservationUseCase'
+import { ITryBookReservationUseCase } from '../../domain/usecases/TryBookReservationUseCase'
 import { BaseController } from './BaseController'
 import * as E from 'fp-ts/Either'
 
-// TODO should be in 'infra' layer
 export class ReservationController extends BaseController {
   constructor(
     private useCase: ITryBookReservationUseCase,
