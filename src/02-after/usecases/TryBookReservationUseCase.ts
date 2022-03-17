@@ -2,11 +2,11 @@ import type { Reservation } from '../models'
 import { IReservationRepo } from '../repos'
 import { add } from '../utils/mathUtils'
 
-export interface IBookReservationUseCase {
+export interface ITryBookReservationUseCase {
   tryAccept: (reservation: Reservation) => Promise<number | null>
 }
 
-export class BookReservationUseCase implements IBookReservationUseCase {
+export class TryBookReservationUseCase implements ITryBookReservationUseCase {
   constructor(private capacity: number, private repo: IReservationRepo) {}
 
   async tryAccept(reservation: Reservation): Promise<number | null> {

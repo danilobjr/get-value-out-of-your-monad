@@ -1,10 +1,10 @@
 import { Request, Response } from 'express'
 import { Reservation } from '../models'
-import { IBookReservationUseCase } from '../usecases/BookReservationUseCase'
+import { ITryBookReservationUseCase } from '../usecases/TryBookReservationUseCase'
 import { BaseController } from './BaseController'
 
 export class ReservationController extends BaseController {
-  constructor(private useCase: IBookReservationUseCase) {
+  constructor(private useCase: ITryBookReservationUseCase) {
     super()
   }
 
