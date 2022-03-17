@@ -1,19 +1,25 @@
 import type { Reservation } from '../models'
-import { IReservationRepo } from '../repos'
 import { add } from '../utils/mathUtils'
+import { Either, left, right } from 'fp-ts/Either'
+
+type Failure = 'Over capacity'
+type Sucess = Reservation
 
 export interface ITryBookReservationUseCase {
-  tryAccept: (reservation: Reservation) => Promise<number | null>
+  tryAccept: (
+    reservation: Reservation,
+    reservations: Reservation[],
+  ) => Either<Failure, Sucess>
 }
 
-// TODO 1. this is a business rule. Why has it async stuff? ...
+// TODO should be in 'core' layer
 export class TryBookReservationUseCase implements ITryBookReservationUseCase {
-  constructor(private capacity: number, private repo: IReservationRepo) {}
+  constructor(private capacity: number) {}
 
-  async tryAccept(reservation: Reservation): Promise<number | null> {
-    // TODO 2. ... side effect
-    const reservations = await this.repo.getByDate(reservation.date)
-
+  tryAccept(
+    reservation: Reservation,
+    reservations: Reservation[],
+  ): Either<Failure, Sucess> {
     const reservedSeatsQuantity = reservations
       .map((r) => r.quantity)
       .reduce(add, 0)
@@ -21,14 +27,11 @@ export class TryBookReservationUseCase implements ITryBookReservationUseCase {
     const overCapacity =
       reservedSeatsQuantity + reservation.quantity > this.capacity
     if (overCapacity) {
-      return null
+      return left('Over capacity')
     }
 
-    reservation.accepted = true
+    reservation = { ...reservation, accepted: true }
 
-    // TODO 3. ... side effect
-    return await this.repo.create(reservation)
+    return right(reservation)
   }
 }
-
-// TODO 4. move impure things to the boundary of the request/response loop
