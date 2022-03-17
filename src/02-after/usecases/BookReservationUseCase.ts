@@ -17,8 +17,9 @@ export class BookReservationUseCase implements IBookReservationUseCase {
       .map((r) => r.quantity)
       .reduce((x, y) => x + y, 0)
 
-    // TODO refactor - give a meaning (a name) to this condition
-    if (reservedSeatsQuantity + reservation.quantity > this.capacity) {
+    const overCapacity =
+      reservedSeatsQuantity + reservation.quantity > this.capacity
+    if (overCapacity) {
       return null
     }
 
