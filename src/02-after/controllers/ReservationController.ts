@@ -3,6 +3,7 @@ import { Reservation } from '../models'
 import { ITryBookReservationUseCase } from '../usecases/TryBookReservationUseCase'
 import { BaseController } from './BaseController'
 
+// TODO should be in 'infra' layer
 export class ReservationController extends BaseController {
   constructor(private useCase: ITryBookReservationUseCase) {
     super()

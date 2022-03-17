@@ -1,7 +1,7 @@
 import { Reservation } from '../models'
 
+// TODO should be in 'infra' layer
 export type IReservationRepo = {
   getByDate: (date: Date) => Promise<Reservation[]>
-  // TODO - refactor. Return should be a nominal type (ReservationId, for example)
   create: (reservation: Reservation) => Promise<number>
 }
