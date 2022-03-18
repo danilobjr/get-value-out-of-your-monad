@@ -2,7 +2,7 @@ import type { Reservation } from '../models'
 import { add } from '../../utils/mathUtils'
 import { Either, left, right } from 'fp-ts/Either'
 
-type Failure = 'Over capacity'
+type Failure = Error
 type Sucess = Reservation
 
 export interface ITryBookReservationUseCase {
@@ -26,7 +26,7 @@ export class TryBookReservationUseCase implements ITryBookReservationUseCase {
     const overCapacity =
       reservedSeatsQuantity + reservation.quantity > this.capacity
     if (overCapacity) {
-      return left('Over capacity')
+      return left(new Error('Over capacity'))
     }
 
     reservation = { ...reservation, accepted: true }

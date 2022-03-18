@@ -1,13 +1,11 @@
-import { Response } from 'express'
+import * as T from 'fp-ts/Task'
 
 export abstract class BaseController {
-  protected ok<T>(response: Response, data: T) {
-    console.log('OK: ', JSON.stringify(data ?? 'No content'))
-    return response
+  protected ok<T>(data: T) {
+    return T.of(`[OK] ${JSON.stringify(data ?? 'No content')}`)
   }
 
-  protected internalServerError(response: Response, message: string) {
-    console.log('Internal Server Error: ', message)
-    return response
+  protected internalServerError(error: Error) {
+    return T.of(`[Internal Server Error] ${String(error)}`)
   }
 }
